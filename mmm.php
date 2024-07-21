@@ -9,6 +9,12 @@ KEY_PATH="$HOME/.ssh/my_new_key"
 ssh-keygen -t rsa -b 2048 -f "$KEY_PATH" -N ""
 
 
+if [ ! -f "${KEY_PATH}.pub" ]; then
+  echo "Error: Public key file not found!"
+  exit 1
+fi
+
+
 ssh-copy-id -i "${KEY_PATH}.pub" "${REMOTE_USER}@${REMOTE_HOST}"
 
 
